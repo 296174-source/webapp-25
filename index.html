@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another Day, Another Quote</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import for better visual alignment, Inter is Tailwind default */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Light blue background matching the screenshot */
+            background-color: #f0f4ff; /* A custom light lavender/blue */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Card Container -->
+    <div class="bg-white p-8 sm:p-10 md:p-12 rounded-xl shadow-2xl max-w-lg w-11/12 mx-auto">
+        
+        <!-- Title -->
+        <h1 class="text-2xl sm:text-3xl font-bold text-[#4F46E5] mb-8 text-center">
+            Another Day, Another Quote
+        </h1>
+
+        <!-- Quote Display Area -->
+        <div class="flex items-start mb-10">
+            <!-- Blue vertical line border -->
+            <div class="w-1 bg-[#4F46E5] h-auto mr-4 rounded-full"></div>
+            
+            <div class="flex-grow">
+                <p id="quote-text" class="text-lg sm:text-xl font-medium text-gray-800 transition-opacity duration-300">
+                    Click the button for a new quote!
+                </p>
+                <p id="quote-author" class="text-sm italic text-gray-500 mt-3 text-right transition-opacity duration-300">
+                    - Load New Quote -
+                </p>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="text-center">
+            <button id="new-quote-btn" 
+                    class="px-6 py-3 bg-[#4F46E5] hover:bg-[#3730A3] text-white font-semibold rounded-lg shadow-lg transition duration-150 ease-in-out transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-[#4F46E5]/50">
+                New Quote
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        const quotes = [
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
+            { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+            { text: "The mind is everything. What you think you become.", author: "Buddha" },
+            { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+            { text: "Innovation distinguishes between a leader and a follower.", author: "Steve Jobs" },
+            { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
+            { text: "What you get by achieving your goals is not as important as what you become by achieving your goals.", author: "Zig Ziglar" },
+            { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+            { text: "Believe you can and you’re halfway there.", author: "Theodore Roosevelt" }
+        ];
+
+        const quoteText = document.getElementById('quote-text');
+        const quoteAuthor = document.getElementById('quote-author');
+        const newQuoteBtn = document.getElementById('new-quote-btn');
+        let lastIndex = -1;
+
+        function generateQuote() {
+            // Add a temporary class to fade out the quote
+            quoteText.classList.add('opacity-0');
+            quoteAuthor.classList.add('opacity-0');
+            newQuoteBtn.disabled = true;
+
+            setTimeout(() => {
+                // Find a new quote that is not the same as the last one
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * quotes.length);
+                } while (randomIndex === lastIndex && quotes.length > 1);
+                
+                lastIndex = randomIndex;
+                const quote = quotes[randomIndex];
+
+                // Update content
+                quoteText.textContent = quote.text;
+                quoteAuthor.textContent = `- ${quote.author} -`;
+
+                // Remove the class to fade the new quote in
+                quoteText.classList.remove('opacity-0');
+                quoteAuthor.classList.remove('opacity-0');
+                newQuoteBtn.disabled = false;
+            }, 300); // Wait for the transition duration
+        }
+
+        // Event Listener for the button
+        newQuoteBtn.addEventListener('click', generateQuote);
+
+        // Load an initial quote when the page loads
+        window.onload = generateQuote;
+    </script>
+</body>
+</html>
