@@ -1,85 +1,32 @@
-/* Import a simple Google Font for better aesthetics */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* style.css */
 
-:root {
-    --primary-color: #3f51b5; /* Indigo */
-    --background-color: #e8eaf6; /* Light Lavender */
-    --text-color: #212121; /* Dark Gray */
-    --box-bg: #ffffff; /* White */
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* 1. Ensure smooth background color transitions for the body */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    /* This makes the color change driven by JavaScript smooth, taking 0.8 seconds */
+    transition: background-color 0.8s ease-in-out; 
 }
 
-.quote-container {
-    background-color: var(--box-bg);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
+/* 2. Add a subtle hover effect and transition to the main card container */
+/* We target the main div by its class structure for robustness */
+.bg-white {
+    /* Set up a transition for transform and box-shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-h1 {
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    font-size: 1.8em;
+.bg-white:hover {
+    /* Slightly lift the card on hover */
+    transform: translateY(-5px); 
+    /* Enhance the shadow */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
 }
 
-.quote-box {
-    margin-bottom: 30px;
-    border-left: 5px solid var(--primary-color);
-    padding: 15px 20px;
-    background-color: #f7f9fc;
+/* 3. Add a more distinct hover style for the vertical line element */
+.w-1 {
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.quote-text {
-    font-size: 1.5em;
-    color: var(--text-color);
-    margin-bottom: 15px;
-    line-height: 1.4;
-}
-
-.quote-author {
-    display: block;
-    text-align: right;
-    font-style: italic;
-    color: #616161;
-    font-size: 1.1em;
-}
-
-/* Style for the single New Quote button */
-#new-quote-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    outline: none;
-}
-
-#new-quote-btn:hover {
-    background-color: #303f9f;
-}
-
-#new-quote-btn:active {
-    background-color: #1a237e;
-    transform: translateY(1px);
+.bg-white:hover .w-1 {
+    /* Make the line slightly bolder/more prominent on card hover */
+    transform: scaleY(1.05); 
+    background-color: #3730A3; /* Darker blue on hover */
 }
